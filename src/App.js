@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs, Icon, message, Input } from 'antd';
-import _ from 'lodash';
+import { cloneDeep } from 'lodash';
 import 'antd/dist/antd.css';
 // import { Glo_getRequest } from '../../../global/js/request';
 import EditSecondCategory from './edit-second-category';
@@ -170,7 +170,7 @@ class App extends React.Component {
       return this.setState(tempState);
     }
     // 更换位置
-    const temp = _.cloneDeep(
+    const temp = cloneDeep(
       tempState.category[tempState.activeKey].value[tempState.moveFrom]);
     tempState.category[tempState.activeKey].value.splice(+tempState.moveFrom, 1);
     tempState.category[tempState.activeKey].value.splice(+to, 0, temp);
@@ -192,7 +192,7 @@ class App extends React.Component {
       return this.setState(tempState);
     }
     // 更换位置
-    const temp = _.cloneDeep(
+    const temp = cloneDeep(
       tempState.category[tempState.activeKey].value[tempState.moveFrom]);
     tempState.category[tempState.activeKey].value.splice(+tempState.moveFrom, 1);
     tempState.category[to].value.push(temp);
@@ -358,7 +358,7 @@ class App extends React.Component {
   }
   initData = () => {
     this.setState({
-      category: _.cloneDeep(this.state.initialData),
+      category: cloneDeep(this.state.initialData),
     });
   }
   saveData = () => {
