@@ -1,8 +1,8 @@
-# what is this
+# What is this
 
 > This is a category management system based on 'creat-react-app' and 'antd' development.
 
-## how to run it
+## How to run it
 
 ``` bash
 # install dependencies
@@ -14,7 +14,11 @@ npm start
 # build for production with minification
 npm run build
 ```
-功能介绍（英语不太好就怼中文了）
+
+## Demo
+https://xiaoleng123.github.io/category-manage/
+
+## 功能介绍
 
 **左侧一级类目：** 点击左边箭头更换位置；点击右边叉叉删除；点击+增加；单击选择类目；双击更改名字。
 
