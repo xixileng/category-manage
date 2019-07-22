@@ -9,7 +9,7 @@ import './style.less';
 
 const TabPane = Tabs.TabPane;
 class App extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       initialData: [], // 保存初始数据
@@ -35,7 +35,7 @@ class App extends React.Component {
   add = () => {
     const tempState = Object.assign({}, this.state);
     const key = +tempState.category[tempState.category.length - 1].key + 1;
-    tempState.category.push({ name: `一级类目${key + 1}`, value: [], key: String(key) });
+    tempState.category.push({ name: `一级类目${ key + 1 }`, value: [], key: String(key) });
     this.setState(tempState);
   }
   // 移除一级标签
@@ -63,11 +63,11 @@ class App extends React.Component {
     const tempState = Object.assign({}, this.state);
     const index = +e.target.getAttribute('name');
     tempState.category[index].name = <Input type="text" size="small" autoFocus={true}
-      style={{ width: 56 }} defaultValue={ tempState.category[index].name }
-      onFocus={ ev => this.firstChange('firstName', ev.target.value, index) }
-      onChange={ ev => this.firstChange('firstName', ev.target.value, index) }
-      onPressEnter={ () => this.saveFirstName('firstName', index) }
-      onBlur={ () => this.saveFirstName('firstName', index) }/>;
+      style={{ width: 56 }} defaultValue={tempState.category[index].name}
+      onFocus={ev => this.firstChange('firstName', ev.target.value, index)}
+      onChange={ev => this.firstChange('firstName', ev.target.value, index)}
+      onPressEnter={() => this.saveFirstName('firstName', index)}
+      onBlur={() => this.saveFirstName('firstName', index)} />;
     tempState.isPrevent = false;
     this.setState(tempState);
   }
@@ -102,14 +102,14 @@ class App extends React.Component {
     tempState.category[index] = tempState.category[i];
     tempState.category[i] = temp;
     this.initPanesKeys();
-    tempState.activeKey = `${i}`;
+    tempState.activeKey = `${ i }`;
     this.setState(tempState);
   }
   // 初始化数据的key值,方便对数据的操作
   initPanesKeys = () => {
     const tempState = Object.assign({}, this.state);
     tempState.category.forEach((e, i) => {
-      e.key = `${i}`;
+      e.key = `${ i }`;
     });
     this.setState(tempState);
   }
@@ -362,6 +362,7 @@ class App extends React.Component {
     });
   }
   saveData = () => {
+    message.info('控制台查看数据')
     console.log(this.state.category);
   }
   inputChange = (type, value, index) => {
@@ -385,24 +386,24 @@ class App extends React.Component {
     this.setState({ showEdit: false });
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.reqFirstCategory();
   }
-  render() {
+  render () {
     const {
       secondCategory,
       category,
     } = this.state;
     return (
-      <div onMouseMove={ e => this.state.isPrevent && e.preventDefault() }>
+      <div onMouseMove={e => this.state.isPrevent && e.preventDefault()}>
         <Tabs
-          className = "categoryPane"
+          className="categoryPane"
           tabPosition='left'
           onChange={this.onPaneChange}
           activeKey={this.state.activeKey}
           type="editable-card"
           onEdit={(targetKey, action) => { this.onEdit(targetKey, action); }}>
-          { this.state.category.map((pane, j) =>
+          {this.state.category.map((pane, j) =>
             <TabPane
               tab={<span name={j}
                 onMouseUp={e => this.onTabMouseUp(e)}>
@@ -416,17 +417,17 @@ class App extends React.Component {
             >
               {pane.value.map((item, i) =>
                 <div
-                  key={`${pane.key}${i}`}
+                  key={`${ pane.key }${ i }`}
                   name={i}
-                  className={`tabDiv ${i === +this.state.moveFrom ? 'move' : ''} ${i === +this.state.moveCurrent ? (this.state.isLess ? 'moving-right' : 'moving-left') : ''}`}
-                  onMouseDown={ e => this.onPaneMouseDown(e) }
-                  onMouseOver={ e => this.onPaneMouseOver(e) }
-                  onMouseOut={ e => this.onPaneMouseOut(e) }
-                  onMouseUp={ e => this.onPaneMouseUp(e) }
-                  onClick={ e => this.onPaneClick(e) }>
+                  className={`tabDiv ${ i === +this.state.moveFrom ? 'move' : '' } ${ i === +this.state.moveCurrent ? (this.state.isLess ? 'moving-right' : 'moving-left') : '' }`}
+                  onMouseDown={e => this.onPaneMouseDown(e)}
+                  onMouseOver={e => this.onPaneMouseOver(e)}
+                  onMouseOut={e => this.onPaneMouseOut(e)}
+                  onMouseUp={e => this.onPaneMouseUp(e)}
+                  onClick={e => this.onPaneClick(e)}>
                   <Icon className="delete" type="cross" name={i}
-                    onClick={ e => this.removeSecondTab(e) }/>
-                  <img className="tabImg" src={item.url} alt={item.secondName}/>
+                    onClick={e => this.removeSecondTab(e)} />
+                  <img className="tabImg" src={item.url} alt={item.secondName} />
                   <p className="name">{item.secondName}</p>
                 </div>)
               }
@@ -434,11 +435,11 @@ class App extends React.Component {
                 className="tabDiv addTab"
                 onClick={this.addSecondTab}
               >
-                <Icon type="plus" style={{ paddingTop: '60px' }}/>
+                <Icon type="plus" style={{ paddingTop: '60px' }} />
               </div>
-            </TabPane>) }
+            </TabPane>)}
         </Tabs>
-        { this.state.showEdit ?
+        {this.state.showEdit ?
           <EditSecondCategory
             secondCategory={secondCategory}
             category={category}
@@ -447,14 +448,14 @@ class App extends React.Component {
             addBackCategory={this.addBackCategory}
             inputChange={(type, value, index) => this.inputChange(type, value, index)}
           >
-          </EditSecondCategory> : null }
+          </EditSecondCategory> : null}
         <ConfirmButton
           showEdit={this.state.showEdit}
           category={category}
           initData={this.initData}
           saveData={this.saveData}
         ></ConfirmButton>
-        <div style={{position: 'absolute', bottom: 200 }}>*:图片所有权归<a href="http://www.showjoy.com/">尚妆</a>所有</div>
+        <div style={{ position: 'absolute', bottom: 200 }}>*:图片所有权归<a href="http://www.showjoy.com/">尚妆</a>所有</div>
       </div>
     );
   }
